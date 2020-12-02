@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 using namespace std;
 #define MAX 1000  // 通讯录最大人数
 
@@ -18,7 +19,7 @@ void showMenu() {
 // 联系人结构体
 struct Person
 {
-	string name;
+	string name; 
 	// 1 男 2 女
 	int sex;
 	int age;
@@ -60,12 +61,12 @@ void addPerson(AddressBooks* abs) {
 		cout << "输入有误请从新输入" << endl;
 	}
 
-	int age;
+	int age = 0;
 	cout << "请输入年龄" << endl;
 	cin >> age;
 	abs->personArray[abs->size].age = age;
 
-	int phone;
+	string phone;
 	cout << "请输入电话" << endl;
 	cin >> phone;
 	abs->personArray[abs->size].phone = phone;
@@ -81,6 +82,24 @@ void addPerson(AddressBooks* abs) {
 	system("cls");
 };
 
+// 2. 显示联系人
+void showPerson(AddressBooks* abs) {
+	if (abs->size == 0) {
+		cout << "暂无联系人";
+	}
+	else {
+		for (int i = 0; i < abs->size; i++)
+		{
+			cout << "姓名: " << abs->personArray[i].name << "\t";
+			cout << "性别: " << (abs->personArray[i].sex == 1 ? "男" : "女") << "\t";
+			cout << "年龄: " << abs->personArray[i].age << "\t";
+			cout << "电话: " << abs->personArray[i].phone << "\t";
+			cout << "家庭住址: " << abs->personArray[i].address << endl;
+		}
+	}
+	system("pause");
+	system("cls");
+}
 int main() {
 
 	int select;
@@ -98,6 +117,7 @@ int main() {
 			addPerson(&abs);
 			break;
 		case 2: // 显示联系人
+			showPerson(&abs);
 			break;
 		case 3: // 删除联系人
 			break;
