@@ -143,11 +143,77 @@ void findPerson(AddressBooks* abs) {
 		cout << "性别: " << abs->personArray[existIndex].sex << "\t";
 		cout << "年龄: " << abs->personArray[existIndex].age << "\t";
 		cout << "电话: " << abs->personArray[existIndex].phone << "\t";
-		cout << "家庭住址: " << abs->personArray[existIndex].address<< endl;
+		cout << "家庭住址: " << abs->personArray[existIndex].address << endl;
 	}
 	else {
 		cout << "未查到联系人" << endl;
 	}
+	system("pause");
+	system("cls");
+}
+
+// 5. 更新联系人
+void updatePerson(AddressBooks* abs) {
+	cout << "请输入联系人的姓名" << endl;
+	string name;
+	cin >> name;
+	int existIndex = isExist(abs, name);
+	if (existIndex != -1) {
+		cout << "姓名修改" << endl;
+		string updateName;
+		cin >> updateName;
+		abs->personArray[existIndex].name = updateName;
+
+		cout << "性别修改" << endl;
+		cout << "1 --- 男" << endl;
+		cout << "2 --- 女" << endl;
+		int updateSex;
+		while (true)
+		{
+			cin >> updateSex;
+			if (updateSex == 1 || updateSex == 2) {
+				abs->personArray[existIndex].sex = updateSex;
+				break;
+			}
+			cout << "输入有误请从新输入" << endl;
+		}
+
+		cout << "年龄修改" << endl;
+		int updateAge;
+		cin >> updateAge;
+		abs->personArray[existIndex].age = updateAge;
+
+		cout << "电话修改" << endl;
+		string updatePhone;
+		cin >> updatePhone;
+		abs->personArray[existIndex].phone = updatePhone;
+
+		cout << "住址修改" << endl;
+		string updateAddress;
+		cin >> updateAddress;
+		abs->personArray[existIndex].address = updateAddress;
+
+		cout << "修改成功!" << endl;
+	}
+	else {
+		cout << "未查到联系人" << endl;
+	}
+	system("pause");
+	system("cls");
+}
+
+// 6. 清空所有联系人
+void cleanPerson(AddressBooks* abs) {
+	int comfirm;
+	cout << "是否清空全部联系人?" << endl;
+	cout << "1 --- 确认" << endl;
+	cout << "2 --- 取消" << endl;
+	cin >> comfirm;
+	if (comfirm == 1) {
+		abs->size = 0;
+		cout << "通讯录已清空" << endl;
+	}
+
 	system("pause");
 	system("cls");
 }
@@ -180,8 +246,10 @@ int main() {
 			findPerson(&abs);
 			break;
 		case 5: // 修改联系人
+			updatePerson(&abs);
 			break;
 		case 6: // 清空联系人
+			cleanPerson(&abs);
 			break;
 		case 0: // 退出通讯录
 			cout << "你已退出" << endl;
