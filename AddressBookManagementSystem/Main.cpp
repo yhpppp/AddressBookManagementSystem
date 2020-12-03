@@ -15,11 +15,10 @@ void showMenu() {
 	cout << "*****	0-退出通讯录	*****" << endl;
 	cout << "*****************************" << endl;
 }
-
 // 联系人结构体
 struct Person
 {
-	string name; 
+	string name;
 	// 1 男 2 女
 	int sex;
 	int age;
@@ -34,6 +33,16 @@ struct AddressBooks
 	struct Person personArray[MAX];
 	int size;
 };
+int isExist(AddressBooks* abs, string name) {
+
+	for (int i = 0; i < abs->size; i++)
+	{
+		if (abs->personArray[i].name == name) {
+			return i;
+		}
+	}
+	return -1;
+}
 
 // 1. 添加联系人
 void addPerson(AddressBooks* abs) {
@@ -85,7 +94,7 @@ void addPerson(AddressBooks* abs) {
 // 2. 显示联系人
 void showPerson(AddressBooks* abs) {
 	if (abs->size == 0) {
-		cout << "暂无联系人";
+		cout << "通讯录为空" << endl;
 	}
 	else {
 		for (int i = 0; i < abs->size; i++)
@@ -96,6 +105,28 @@ void showPerson(AddressBooks* abs) {
 			cout << "电话: " << abs->personArray[i].phone << "\t";
 			cout << "家庭住址: " << abs->personArray[i].address << endl;
 		}
+	}
+	system("pause");
+	system("cls");
+}
+
+// 3.. 删除联系人
+void deletePerson(AddressBooks* abs) {
+	cout << "请输入你要删除的联系人姓名" << endl;
+	string name;
+	cin >> name;
+
+	int existIndex = isExist(abs, name);
+	if (existIndex != -1) {
+		for (int i = existIndex; i < abs->size; i++)
+		{
+			abs->personArray[existIndex] = abs->personArray[existIndex + 1];
+		}
+		abs->size--;
+		cout << "删除成功" << endl;
+	}
+	else {
+		cout << "未查到此人" << endl;
 	}
 	system("pause");
 	system("cls");
@@ -120,7 +151,18 @@ int main() {
 			showPerson(&abs);
 			break;
 		case 3: // 删除联系人
-			break;
+		{
+			/*		string name;
+					cin >> name;
+					if (isExist(&abs, name) != -1) {
+						cout << "存在" << endl;
+					}
+					else {
+						cout << "没有哦" << endl;
+					}*/
+			deletePerson(&abs);
+		}
+		break;
 		case 4: // 查找联系人 
 			break;
 		case 5: // 修改联系人
