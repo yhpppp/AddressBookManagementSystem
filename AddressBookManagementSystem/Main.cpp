@@ -110,7 +110,7 @@ void showPerson(AddressBooks* abs) {
 	system("cls");
 }
 
-// 3.. 删除联系人
+// 3. 删除联系人
 void deletePerson(AddressBooks* abs) {
 	cout << "请输入你要删除的联系人姓名" << endl;
 	string name;
@@ -131,6 +131,27 @@ void deletePerson(AddressBooks* abs) {
 	system("pause");
 	system("cls");
 }
+
+// 4. 查找联系人
+void findPerson(AddressBooks* abs) {
+	cout << "请输入联系人的姓名" << endl;
+	string name;
+	cin >> name;
+	int existIndex = isExist(abs, name);
+	if (existIndex != -1) {
+		cout << "姓名: " << abs->personArray[existIndex].name << "\t";
+		cout << "性别: " << abs->personArray[existIndex].sex << "\t";
+		cout << "年龄: " << abs->personArray[existIndex].age << "\t";
+		cout << "电话: " << abs->personArray[existIndex].phone << "\t";
+		cout << "家庭住址: " << abs->personArray[existIndex].address<< endl;
+	}
+	else {
+		cout << "未查到联系人" << endl;
+	}
+	system("pause");
+	system("cls");
+}
+
 int main() {
 
 	int select;
@@ -152,18 +173,11 @@ int main() {
 			break;
 		case 3: // 删除联系人
 		{
-			/*		string name;
-					cin >> name;
-					if (isExist(&abs, name) != -1) {
-						cout << "存在" << endl;
-					}
-					else {
-						cout << "没有哦" << endl;
-					}*/
 			deletePerson(&abs);
 		}
 		break;
 		case 4: // 查找联系人 
+			findPerson(&abs);
 			break;
 		case 5: // 修改联系人
 			break;
